@@ -10,6 +10,10 @@ class CarService implements IService<ICar> {
     return this._car.read();
   }
 
+  public async readOne(_id: string): Promise<ICar | null> {
+    return this._car.readOne(_id);
+  }
+
   public async create(obj:unknown): Promise<ICar> {
     const parsed = CarZodSchema.safeParse(obj);
     if (!parsed.success) {
@@ -19,10 +23,6 @@ class CarService implements IService<ICar> {
     const created = await this._car.create(parsed.data);
 
     return created;
-  }
-
-  public async readOne(_id: string): Promise<ICar | null> {
-    return this._car.readOne(_id);
   }
 
   public async delete(_id: string): Promise<ICar | null> {

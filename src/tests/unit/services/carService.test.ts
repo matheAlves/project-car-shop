@@ -8,9 +8,11 @@ import {
   carWithId,
 } from '../../mocks/CarMocks'
 import CarModel from '../../../models/Car';
+import CarService from '../../../services/Car';
 
-describe('Car model', () => {
+describe('Car Service', () => {
   const carModel = new CarModel();
+  const carService = new CarService(carModel);
   beforeEach(() => sinon.restore())
 
   describe('reading all cars', () => {
@@ -18,7 +20,7 @@ describe('Car model', () => {
 
     it('returns a list of all cars', async () => {
       sinon.stub(Model, 'find').resolves(allCars)
-      const result = await carModel.read();
+      const result = await carService.read();
       expect(result).to.deep.equal(allCars)
     })
   })
@@ -27,7 +29,7 @@ describe('Car model', () => {
 
     it('returns a car when id is valid', async () => {
       sinon.stub(Model, 'findOne').resolves(carWithId)
-      const result = await carModel.readOne('6346e197322610a228e710d9')
+      const result = await carService.readOne('6346e197322610a228e710d9')
       expect(result).to.deep.equal(carWithId)
     })
 
@@ -47,7 +49,7 @@ describe('Car model', () => {
 
     it('returns the created car when successful', async () => {
       sinon.stub(Model, 'create').resolves(carWithId)
-      const result = await carModel.create(validCar)
+      const result = await carService.create(validCar)
       expect(result).to.deep.equal(carWithId)
     })
   })
