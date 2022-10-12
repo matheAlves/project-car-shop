@@ -1,7 +1,6 @@
 import { ErrorTypes } from '../errors/catalog';
 import { ICar, CarZodSchema } from '../interfaces/ICar';
 import { IModel } from '../interfaces/IModel';
-import { IService } from '../interfaces/IService';
 
 class CarService {
   constructor(private _car:IModel<ICar>) {}
