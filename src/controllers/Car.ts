@@ -4,7 +4,7 @@ import { ICar } from '../interfaces/ICar';
 
 export default class CarController {
   constructor(private _service: IService<ICar>) {}
-
+  
   public async read(
     _req: Request,
     res: Response,
@@ -21,6 +21,14 @@ export default class CarController {
     return res.status(200).json(result);
   }
 
+  public async create(
+    req: Request, 
+    res: Response<ICar>,
+  ) {
+    const created = await this._service.create(req.body);
+    return res.status(201).json(created);
+  } 
+
   public async delete(
     req: Request,
     res: Response,
@@ -35,13 +43,5 @@ export default class CarController {
   ) {
     const updated = await this._service.update(req.params.id, req.body);
     return res.status(200).json(updated);
-  }
-
-  public async create(
-    req: Request, 
-    res: Response<ICar>,
-  ) {
-    const created = await this._service.create(req.body);
-    return res.status(201).json(created);
   }
 }

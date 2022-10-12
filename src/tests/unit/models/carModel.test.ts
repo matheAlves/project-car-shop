@@ -9,7 +9,7 @@ import {
 } from '../../mocks/CarMocks'
 import CarModel from '../../../models/Car';
 
-describe('Car model', () => {
+describe('Car Model', () => {
   const carModel = new CarModel();
   beforeEach(() => sinon.restore())
 
