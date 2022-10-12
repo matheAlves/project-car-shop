@@ -6,7 +6,6 @@ import {
   validCar, 
   updatedCar,
   carWithId,
-  noSeatsCar
 } from '../../mocks/CarMocks'
 import CarModel from '../../../models/Car';
 import CarService from '../../../services/Car';
@@ -53,6 +52,17 @@ describe('Car Service', () => {
       sinon.stub(Model, 'create').resolves(carWithId)
       const result = await carService.create(validCar)
       expect(result).to.deep.equal(carWithId)
+    })
+
+    it('returns error if car is missing data', async () => {
+      let error: any
+      try {
+        await carService.create({})
+      } catch (e) {
+        error = e
+      }
+
+      expect(error).to.be.instanceOf(ZodError)
     })
   })
 })
