@@ -49,7 +49,6 @@ abstract class MongoModel<T> implements IModel<T> {
 
     return deleted;
   }
-
 }
 
 export default MongoModel;
