@@ -1,9 +1,9 @@
 import { ErrorTypes } from '../errors/catalog';
 import { ICar, CarZodSchema } from '../interfaces/ICar';
 import { IModel } from '../interfaces/IModel';
-// import { IService } from '../interfaces/IService';
+import { IService } from '../interfaces/IService';
 
-class CarService {
+class CarService implements IService<ICar> {
   constructor(private _car:IModel<ICar>) {}
 
   public async read(): Promise<ICar[]> {
@@ -23,6 +23,10 @@ class CarService {
 
   public async readOne(_id: string): Promise<ICar | null> {
     return this._car.readOne(_id);
+  }
+
+  public async delete(_id: string): Promise<ICar | null> {
+    return this._car.delete(_id);
   }
 
   public async update(_id: string, obj: unknown): Promise<ICar & { _id: string }> {
