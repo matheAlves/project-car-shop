@@ -21,6 +21,10 @@ class CarService {
     return created;
   }
 
+  public async readOne(_id: string): Promise<ICar | null> {
+    return this._car.readOne(_id);
+  }
+
   public async update(_id: string, obj: unknown): Promise<ICar & { _id: string }> {
     const parsed = CarZodSchema.safeParse(obj);
     if (!parsed.success) {
