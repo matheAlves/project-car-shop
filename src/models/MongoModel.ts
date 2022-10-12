@@ -1,19 +1,35 @@
-/* eslint-disable class-methods-use-this */
-import { Model } from 'mongoose';
+import { Model, isValidObjectId, UpdateQuery } from 'mongoose';
+import { ErrorTypes } from '../errors/catalog';
 import { IModel } from '../interfaces/IModel';
 
 abstract class MongoModel<T> implements IModel<T> {
   constructor(protected _model: Model<T>) {}
   
-  read(): Promise<T[]> {
-    throw new Error('a');
+  public async read(): Promise<T[]> {
+    const list = await this._model.find({});
+    return list;
   }
-  readOne(_id: string): Promise<any> {
-    throw new Error('b');
+
+  public async readOne(_id: string): Promise<T | null> {
+    if (!isValidObjectId(_id)) throw Error(ErrorTypes.InvalidMongoId);
+
+    return this._model.findOne({ _id });
   }
-  update(_id: string, _obj: T): Promise<any> {
-    throw new Error('Method not implemented.');
+
+  public async update(_id: string, obj:Partial<T>): Promise<T & { _id: string } | null> {
+    if (!isValidObjectId(_id)) throw Error(ErrorTypes.InvalidMongoId);
+
+    const updated = await this._model.findByIdAndUpdate(
+      { _id },
+      { ...obj } as UpdateQuery<T>,
+      { new: true },
+    );
+
+    if (!updated) return null;
+
+    return updated as T & { _id: string };
   }
+
   delete(_id: string): Promise<any> {
     throw new Error('Method not implemented.');
   }
