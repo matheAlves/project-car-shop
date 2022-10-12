@@ -3,7 +3,7 @@ import { ICar, CarZodSchema } from '../interfaces/ICar';
 import { IModel } from '../interfaces/IModel';
 import { IService } from '../interfaces/IService';
 
-class CarService implements IService<ICar> {
+class CarService {
   constructor(private _car:IModel<ICar>) {}
 
   public async read(): Promise<ICar[]> {

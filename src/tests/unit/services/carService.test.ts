@@ -6,9 +6,11 @@ import {
   validCar, 
   updatedCar,
   carWithId,
+  noSeatsCar
 } from '../../mocks/CarMocks'
 import CarModel from '../../../models/Car';
 import CarService from '../../../services/Car';
+import { ZodError } from 'zod';
 
 describe('Car Service', () => {
   const carModel = new CarModel();
@@ -36,7 +38,7 @@ describe('Car Service', () => {
     it('returns an error when id is invalid', async () => {
       let error: any
       try {
-        await carModel.readOne('invalidId')
+        await carService.readOne('invalidId')
       } catch (e) {
         error = e
       }
