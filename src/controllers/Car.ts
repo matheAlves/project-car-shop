@@ -1,9 +1,17 @@
 import { Request, Response } from 'express';
-import { IService } from '../interfaces/IService';
+// import { IService } from '../interfaces/IService';
 import { ICar } from '../interfaces/ICar';
 
 export default class CarController {
-  constructor(private _service: IService<ICar>) {}
+  constructor(private _service: any) {}
+
+  public async read(
+    _req: Request,
+    res: Response,
+  ) {
+    const list = await this._service.read();
+    return res.status(200).json(list);
+  }
 
   public async create(
     req: Request, 

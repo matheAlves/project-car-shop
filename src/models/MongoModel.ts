@@ -30,8 +30,10 @@ abstract class MongoModel<T> implements IModel<T> {
     return updated as T & { _id: string };
   }
 
-  delete(_id: string): Promise<any> {
-    throw new Error('Method not implemented.');
+  public async delete(_id: string): Promise<T | null> {
+    if (!isValidObjectId(_id)) throw Error(ErrorTypes.InvalidMongoId);
+
+    return this._model.findByIdAndRemove(_id);
   }
 
   public async create(obj:T):Promise<T & { _id: string }> {
