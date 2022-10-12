@@ -19,8 +19,14 @@ abstract class MongoModel<T> implements IModel<T> {
 
     return result;
   }
+  
+  public async create(obj:T):Promise<T> {
+    const created = await this._model.create({ ...obj });
 
-  public async update(_id: string, obj:Partial<T>): Promise<T & { _id: string } | null> {
+    return created as T & { _id: string };
+  }
+
+  public async update(_id: string, obj:Partial<T>): Promise<T | null> {
     if (!isValidObjectId(_id)) throw Error(ErrorTypes.InvalidMongoId);
 
     const updated = await this._model.findByIdAndUpdate(
@@ -44,11 +50,6 @@ abstract class MongoModel<T> implements IModel<T> {
     return deleted;
   }
 
-  public async create(obj:T):Promise<T & { _id: string }> {
-    const created = await this._model.create({ ...obj });
-
-    return created as T & { _id: string };
-  }
 }
 
 export default MongoModel;

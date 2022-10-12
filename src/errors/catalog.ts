@@ -3,7 +3,7 @@ export enum ErrorTypes {
   InvalidMongoId = 'InvalidMongoId',
 }
 
-type ErrorResponseObject = { 
+export type ErrorResponseObject = { 
   error: string;
   httpStatus: number
 };

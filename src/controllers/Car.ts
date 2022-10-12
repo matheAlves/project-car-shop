@@ -39,7 +39,7 @@ export default class CarController {
 
   public async create(
     req: Request, 
-    res: Response<ICar & { _id: string }>,
+    res: Response<ICar>,
   ) {
     const created = await this._service.create(req.body);
     return res.status(201).json(created);
