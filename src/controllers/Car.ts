@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
-// import { IService } from '../interfaces/IService';
+import { IService } from '../interfaces/IService';
 import { ICar } from '../interfaces/ICar';
-// import { IService } from '../interfaces/IService';
 
 export default class CarController {
-  constructor(private _service: any) {}
+  constructor(private _service: IService<ICar>) {}
 
   public async read(
     _req: Request,
