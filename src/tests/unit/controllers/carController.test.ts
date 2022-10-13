@@ -59,12 +59,17 @@ describe('Car Controller', () => {
     })
   })
 
-  // describe('creates a new car', () => {
+  describe('creates a new car', () => {
+    it('returns the created car when successful', async () => {
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+      req.body = validCar
 
-  //   it('returns the created car when successful', async () => {
-  //     sinon.stub(Model, 'create').resolves(carWithId)
-  //     const result = await carService.create(validCar)
-  //     expect(result).to.deep.equal(carWithId)
-  //   })
-  // })
+      sinon.stub(carService, 'create').resolves(carWithId)
+      const result = await carController.create(req, res)
+      
+      expect((res.status as sinon.SinonStub).calledWith(201)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(carWithId)).to.be.true;
+    })
+  })
 })
