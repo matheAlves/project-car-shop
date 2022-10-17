@@ -72,3 +72,15 @@ As opções de categorias para motos são: Street, Custom e Trail.
 
 * Para deletar um veículo, faça uma requisição do tipo **DELETE** para o endpoint `/cars/id` para **Carros**, ou `/motorcycles/id` para **Motos**, fornecendo o id do veículo no endpoint.
 
+Testes
+----------
+Para rodar os testes unitários:
+```bash
+npm test
+```
+Para rodar os testes com informações sobre a cobertura:
+```bash
+npm run test:coverage
+```
+
+
