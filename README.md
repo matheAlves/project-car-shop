@@ -4,7 +4,6 @@ Introdução
 Projeto de API RESTful construída em Node.js para cadastro de veículos, conectado a um banco de dados no-SQL MongoDB através de ODM Mongoose e escrito em TypeScript.
 
 O projeto possui estruturação em camadas (Model, Service, Controller) desenvolvidas com classes abstratas, utilizando os princípios da programação orientada a objetos para garantir fácil escalabilidade e a biblioteca Zod para validação de schemas.
-As valida
 
 Os testes unitários das camadas foram desenvolvidos com o uso de Mocha, Chai e Sinon.
 
